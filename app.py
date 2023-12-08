@@ -2,10 +2,10 @@
 
 import os
 
-from flask import Flask
+from flask import Flask, flash, request, render_template, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from models import connect_db
+from models import db, connect_db, Pet
 
 app = Flask(__name__)
 
@@ -22,9 +22,14 @@ app.config['SQLALCHEMY_ECHO'] = True #---> When using SQL Alchemy
 
 connect_db(app)
 
-# Having the Debug Toolbar show redirects explicitly is often useful;
-# however, if you want to turn it off, you can uncomment this line:
-#
-# app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
-toolbar = DebugToolbarExtension(app)
+@app.get('/')
+def index():
+    '''Homepage to list pets'''
+
+    pets = Pet.query.all()
+
+    return render_template(
+        'home.html',
+        pets=pets
+    )

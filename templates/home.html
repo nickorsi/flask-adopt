@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+<!-- Comment for home.html loaded. For testing, do not remove -->
+
+<h1>Pets</h1>
+
+<div class="d-flex flex-row">
+  {% for pet in pets %}
+
+  <div class="d-flex flex-column">
+    <img src="{{ pet.photo_url }}" alt="pet photo" class="img-thumbnail w-25">
+
+    <p>{{ pet.name }}
+      {% if pet.available %}
+      <b>is available!</b>
+      {% endif %}
+    </p>
+
+  </div>
+
+  {% endfor %}
+
+</div>
+
+
+{% endblock content %}
