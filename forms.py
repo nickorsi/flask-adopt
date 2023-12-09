@@ -28,8 +28,10 @@ class AddPetForm(FlaskForm):
     age = SelectField(
         "Pet Age",
         choices=[
-            ('baby','Baby'), ('young','Young'), ('adult','Adult'),
-            ('senior','Senior')
+            ('baby','Baby'),
+            ('young','Young'),
+            ('adult','Adult'),
+            ('senior','Senior'),
         ],
         validators=[InputRequired()],
     )
@@ -49,7 +51,7 @@ class EditPetForm(FlaskForm):
     notes = StringField(
         "Pet Notes",
     )
-
+    # note: could use different widget for boolean
     available = BooleanField(
        "Available?",
     )

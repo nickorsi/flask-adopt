@@ -28,7 +28,7 @@ connect_db(app)
 def index():
     '''Homepage to list pets'''
 
-    pets = Pet.query.all()
+    pets = Pet.query.order_by('name').all()
 
     return render_template(
         'home.html',
