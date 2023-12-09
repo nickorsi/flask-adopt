@@ -1,6 +1,6 @@
 """Forms for adopt app."""
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
+from wtforms import StringField, SelectField, BooleanField
 from wtforms.validators import InputRequired, URL, Optional
 
 class AddPetForm(FlaskForm):
@@ -35,4 +35,20 @@ class AddPetForm(FlaskForm):
 
     notes = StringField(
         "Pet Notes",
+    )
+
+class EditPetForm(FlaskForm):
+    """Form for edting pet."""
+
+    photo_url = StringField(
+        "Pet Photo",
+        validators=[Optional(), URL()],
+    )
+
+    notes = StringField(
+        "Pet Notes",
+    )
+    # TODO: Could you make this select field?
+    available = BooleanField(
+       "Available?",
     )

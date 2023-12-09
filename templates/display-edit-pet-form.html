@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+  <div class="d-flex flex-column">
+    <img src="{{ pet.photo_url }}" alt="pet photo" class="img-thumbnail w-25">
+    <ul>
+      <li>{{ pet.name }}</li>
+      <li>{{ pet.age }}</li>
+      <li>{{ pet.species }}</li>
+    </ul>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+
+      {% for field in form if field.widget.input_type != 'hidden' %}
+        <p>
+        {{ field.label }}
+        {{ field }}
+
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+        </p>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+
+{% endblock content %}

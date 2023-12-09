@@ -15,13 +15,13 @@ Home
 
   <div class="d-flex flex-column">
     <img src="{{ pet.photo_url }}" alt="pet photo" class="img-thumbnail w-25">
-
-    <p>{{ pet.name }}
-      {% if pet.available %}
-      <b>is available!</b>
-      {% endif %}
-    </p>
-
+    <a href="/{{ pet.id }}">
+      <p>{{ pet.name }}
+        {% if pet.available %}
+        <b>is available!</b>
+        {% endif %}
+      </p>
+    </a>
   </div>
 
   {% endfor %}
