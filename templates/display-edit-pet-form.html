@@ -7,7 +7,9 @@ Home
 {% block content %}
 
   <div class="d-flex flex-column">
+    {% if pet.photo_url != "" %}
     <img src="{{ pet.photo_url }}" alt="pet photo" class="img-thumbnail w-25">
+    {% endif %}
     <ul>
       <li>{{ pet.name }}</li>
       <li>{{ pet.age }}</li>
@@ -28,6 +30,9 @@ Home
       {% endfor %}
       <button type="submit" class="btn btn-primary">Save</button>
     </form>
+    <br>
+    <a href="/" class="btn btn-secondary w-25">Return to Home</a>
+
   </div>
 
 {% endblock content %}

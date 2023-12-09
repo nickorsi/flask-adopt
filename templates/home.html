@@ -10,22 +10,29 @@ Home
 
 <h1>Pets</h1>
 
-<div class="d-flex flex-row">
-  {% for pet in pets %}
-
-  <div class="d-flex flex-column">
-    <img src="{{ pet.photo_url }}" alt="pet photo" class="img-thumbnail w-25">
-    <a href="/{{ pet.id }}">
-      <p>{{ pet.name }}
-        {% if pet.available %}
-        <b>is available!</b>
-        {% endif %}
-      </p>
-    </a>
-  </div>
-
+<div>
+  {% for msg in get_flashed_messages() %}
+  <p>{{ msg }}</p>
   {% endfor %}
 </div>
+
+{% for pet in pets %}
+
+<div class="d-flex flex-column">
+  {% if pet.photo_url != "" %}
+  <img src="{{ pet.photo_url }}" alt="pet photo" class="img-thumbnail w-25">
+  {% endif %}
+  <a href="/{{ pet.id }}">
+    <p>{{ pet.name }}
+      {% if pet.available %}
+      <b>is available!</b>
+      {% endif %}
+    </p>
+  </a>
+</div>
+
+{% endfor %}
+
 <a href="/add" class="btn btn-primary">Add Pet</a>
 
 

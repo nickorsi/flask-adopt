@@ -2,7 +2,7 @@
 
 import os
 
-from flask import Flask, flash, request, render_template, redirect, session
+from flask import Flask, flash, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import db, connect_db, Pet
@@ -37,7 +37,7 @@ def index():
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_pet():
-    '''Show page to add pet and handle form submission'''
+    '''Show add pet form and handle add pet'''
 
     form = AddPetForm()
 
@@ -54,18 +54,19 @@ def add_pet():
         db.session.add(pet)
         db.session.commit()
 
+        flash('Pet added!')
         return redirect('/')
 
     else:
 
         return render_template(
             'add-pet-form.html',
-            form=form
+            form=form,
         )
 
 @app.route('/<int:pet_id>', methods=['GET', 'POST'])
 def edit_pet(pet_id):
-    """Show page to edit pet and handle edit form submission"""
+    """Show edit pet form and handle edit pet"""
 
     pet = Pet.query.get_or_404(pet_id)
     form = EditPetForm(obj=pet)
@@ -76,7 +77,8 @@ def edit_pet(pet_id):
         pet.available = form.available.data
 
         db.session.commit()
-        # TODO: Add flash for update success
+
+        flash('Pet edited!')
         return redirect('/')
 
     else:
